@@ -2,7 +2,7 @@ import { describe, expect, it} from '@jest/globals'
 import {add, mul} from './mathFunctions';
 
 describe('Testing of Math functions', ()=> {
-    it('Checking add function', () => {
+    it('Checking mul function', () => {
         expect(mul(2,3)).toBe(6)
         
     });
