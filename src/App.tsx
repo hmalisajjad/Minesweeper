@@ -5,11 +5,11 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <Header logo={logo}>
+      <Header>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <Link href="https://reactjs.org" target="_blank">
+        <Link href="https://reactjs.org">
           Learn react
         </Link>
       </Header>
@@ -18,19 +18,23 @@ function App() {
 }
 
 interface HeaderProps {
-  children: React.ReactElement;
   logo: string;
+  children: React.ReactNode;
 }
 
-const Header= ({
+const Header: FC<HeaderProps>= ({
   children,
   logo,
-}:HeaderProps): React.ReactNode => {
+}) => (
   <header className="App-header">
-    <img src={logo} className="App-logo" alt="logo" />
+    {Boolean(logo) ? (
+      <img src={logo} className="App-logo" alt="logo" />
+    ) : (
+      "There is no any logo"
+    )}
     {children}
-  </header>;
-};
+  </header>
+);
 
 interface LinkProps {
   href: string;
@@ -41,13 +45,16 @@ interface LinkProps {
 
 const Link: FC<LinkProps> = ({
   children,
-  href,
-  target = "_blank",
-  rel = "noopener noreferrer",
+  ...restProps
 }) => (
-  <a className="App-Link" href={href} target={target} rel="noopener noreferrer">
+  <a className="App-Link" {...restProps}>
     {children}
   </a>
 );
+
+Link.defaultProps = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+}
 
 export default App;
